@@ -28,27 +28,15 @@ struct Segtree {
     }
   }
   int query(Node *right, Node *left, int L, int R, int k) {
-    int ans = -1;
-    while (L <= R) {
-      int M = (L + R) / 2;
-      int count = (right->l ? right->l->cnt : 0) - (left->l ? left->l->cnt : 0);
-      if (L == R) {
-        if (ans == -1) {
-          return L;
-        }
-      }
-      if (count >= k) {
-        ans = M;
-        R = M - 1;
-        right = right->l;
-        left = left->l;
-      } else {
-        L = M + 1;
-        right = right->r;
-        left = left->r;
-        k -= count;
-      }
-    }
-    return ans;
-  }
+		if (L == R) {
+			return L;
+		}
+		int M = (L + R) / 2;
+		int count = right->l->cnt - left->l->cnt;
+		if (count >= k) {
+			return query(right->l, left->l, L, M, k);
+		} else {
+			return query(right->r, left->r, M + 1, R, k - count);
+		}
+	}
 };
