@@ -1,5 +1,4 @@
 vector<int> depth(n + 1);
-int mx = 0, idx = 1;
 vector<vector<int>> parent(n + 1, vector<int>(level, -1));
 function<void(int, int, int)> dfs = [&](int x, int prev, int h) {
 	depth[x] = h;
