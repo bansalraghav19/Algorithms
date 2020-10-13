@@ -1,4 +1,3 @@
-
 struct Fenwick {
   vector<int> BIT;
   int N;
