@@ -88,6 +88,8 @@ struct dfs_forest {
   void init_hld() {
     next.resize(this->N + 1);
     dfs_heavyNodes(1);
+    dfs_hld(1);
+    precomputeSparseMatrix(this->N);
   }
   int dist(int x, int y) {
     return depth[x] + depth[y] - 2 * depth[lca(x, y)];
