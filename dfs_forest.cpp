@@ -80,7 +80,7 @@ struct dfs_forest {
   void dfs_hld(int cur, int prev = -1) {
     for (auto &child : v[cur]) {
       if (cur != prev) {
-        next[child] = (child == v[cur][0] ? next[u] : child);
+        next[child] = (child == v[cur][0] ? next[cur] : child);
         dfs_hld(child, cur);
       }
     }
