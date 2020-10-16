@@ -15,9 +15,8 @@ struct dfs_forest {
     depth.resize(N + 1);
     Tin.resize(N + 1);
     Tout.resize(N + 1);
-    subtree.resize(N + 1);
     rTin.resize(N + 1);
-    next.resize(N + 1);
+    subtree.resize(N + 1);
     parent.resize(N + 1, vector<int>(LEVEL, -1));
   }
   void addEdge(int x, int y) {
@@ -26,6 +25,7 @@ struct dfs_forest {
   }
   void dfs_init(int cur, int prev = -1) {
     Tin[cur] = ++timer;
+    rTin[timer] = cur;
     parent[cur][0] = prev;
     subtree[cur] = 1;
     for (auto &child : v[cur]) {
@@ -66,6 +66,28 @@ struct dfs_forest {
       }
     }
     return parent[u][0];
+  }
+  void dfs_heavyNodes(int cur, int prev = -1) {
+    for (auto &child : v[cur]) {
+      if (child != prev) {
+        dfs_heavyNodes(child, cur);
+        if (subtree[child] > subtree[v[cur][0]]) {
+          swap(child, v[cur][0]);
+        }
+      }
+    }
+  }
+  void dfs_hld(int cur, int prev = -1) {
+    for (auto &child : v[cur]) {
+      if (cur != prev) {
+        next[child] = (child == v[cur][0] ? next[u] : child);
+        dfs_hld(child, cur);
+      }
+    }
+  }
+  void init_hld() {
+    next.resize(this->N + 1);
+    dfs_heavyNodes(1);
   }
   int dist(int x, int y) {
     return depth[x] + depth[y] - 2 * depth[lca(x, y)];
