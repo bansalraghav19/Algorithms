@@ -1,4 +1,4 @@
-int pwr(int x, int y) {
+int power(int x, int y) {
   int res = 1;
   while (y > 0) {
     if (y & 1) {
