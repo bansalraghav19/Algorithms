@@ -2,7 +2,7 @@ struct Node {
   Node *left, *right;
   int mx, lazy;
   Node(): left(nullptr), right(nullptr), mx(0), lazy(0) {}
-  Node(Node* l, Node *r): left(l), right(r) {}
+  Node(Node* l, Node *r): left(l), right(r), mx(0), lazy(0) {}
 };
 struct Segtree {
   Node* Build(int L, int R) {
