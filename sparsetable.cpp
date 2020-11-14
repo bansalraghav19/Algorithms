@@ -1,5 +1,6 @@
 struct sparse_table {
-  int N, level;
+  int N;
+  const int level = 20;
   using Node = array<int, 3>;
   vector<int> v;
   vector<int> floorlogs;
@@ -10,7 +11,6 @@ struct sparse_table {
     floorlogs.resize(this->N + 1);
     table.resize(this->N + 1, vector<Node>(level + 1));
     precompute();
-    level = floorlogs[this->N] + 1;
   }
   void precompute() {
     table[1][0][0] = table[1][0][1] = table[1][0][2] = v[1];
