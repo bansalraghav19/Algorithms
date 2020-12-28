@@ -15,7 +15,7 @@ struct FWHT {
     for (int s = 2, h = 1; s <= n; s <<= 1, h <<= 1) {
       for (int l = 0; l < n; l += s) {
         for (int i = 0; i < h; i++) {
-          A[l + i] += !invert * A[l + i + h];
+          A[l + i] += invert * A[l + i + h];
         }
       }
     }
