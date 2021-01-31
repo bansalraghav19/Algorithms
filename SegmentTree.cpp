@@ -26,7 +26,7 @@ struct Segtree {
     if (lazy[node]) {
       propogate(node, L, R);
     }
-    if (ul < L or ur > R) {
+    if (L > ur or R < ul) {
       return;
     }
     if (ul <= L and R <= ur) {
